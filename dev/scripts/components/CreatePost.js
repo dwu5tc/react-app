@@ -5,9 +5,7 @@ export default class CreatePost extends React.Component {
 		super(props);
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		// this.renderForm = this.renderForm.bind(this);
 		this.addOption = this.addOption.bind(this);
-		// this.renderPoll = this.renderPoll.bind(this);
 		this.state = {
 			type: "text",
 			privacy: "public",
@@ -37,7 +35,7 @@ export default class CreatePost extends React.Component {
 	handleSubmit(e) {
 		e.preventDefault();
 		var userId = this.props.currUser.uid;
-		// const userRef = firebase.database().ref(users+"/"+userId+"/"posts);
+		var userRef = firebase.database().ref("users/"+userId);
 		var postsRef = firebase.database().ref("posts/").push();
 		var key = postsRef.key;
 		var date = new Date();
@@ -67,10 +65,18 @@ export default class CreatePost extends React.Component {
 				obj.question = this.state.pollQuestion
 				break;
 		}
-		// userRef.push(obj);
 		postsRef.set(obj);
-		console.log(key);
-		this.props.handleSubmitPost();
+		userRef.child("posts").once("value").then((snapshot) => {
+			if (!snapshot.exists()) {
+				userRef.update({ posts: [key] });
+			}
+			else {
+				var temp = snapshot.val();
+				temp.push(key);
+				userRef.update({ posts: temp });
+			}
+			this.props.handleSubmitPost();
+		})
 	}
 	renderForm() {
 		switch(this.state.type) {
@@ -99,8 +105,8 @@ export default class CreatePost extends React.Component {
 				);
 		}
 	}
-	setType(newType) {
-		this.resetState();
+	setType(newType) { // called with arrow function; no need to bind
+		this.resetState(); // no need to bind since it is called inside setType?
 		if (newType != "poll") {
 			this.setState({
 				type: newType,

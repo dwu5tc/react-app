@@ -12,6 +12,7 @@ import {
 import Login from "./components/Login.js";
 import Home from "./components/Home.js";
 import CreatePost from "./components/CreatePost.js";
+import Feed from "./components/Feed.js";
 
 var config = {
 	apiKey: "AIzaSyAtes0QKFVr-Fe_G4OHWH0G6N5xsIGGS9g",
@@ -274,38 +275,20 @@ class App extends React.Component {
 		auth.onAuthStateChanged((user) => {
 			if (user) {
 				var userId = user.uid;
-				console.log(userId);
-				var userRef = firebase.database().ref("users/");
-				var userExists;
-				var userQuery = userRef.orderByChild("uid").equalTo(userId).once("value").then((snapshot) => {
-					userExists = snapshot;
-					if (!snapshot) {
-						console.log("snapshot parent", snapshot.ref(), snapshot.val());
-					}
-					else {
-						console.log("snapshot empty???");
-					}
-				});
-				if (!userExists) {
-					var userRef = firebase.database().ref("users/").push();
-					var key = userRef.key;
-					// var temp;
-					// userRef.once("value")
-					// 	.then((snapshot) => {
-					// 		temp = snapshot.val();
-					// 	});
-					// if (!temp) {
+				var userRef = firebase.database().ref("users/"+userId);
+				userRef.once("value").then((snapshot) => {
+					var userExists = snapshot.exists();
+					if (!userExists) { ;
 						userRef.set({
 							name: user.displayName,
-							uid: user.uid,
 							pic: user.photoURL
 						});
-					// }
-				}
-				this.setState({
-					user: user,
-					fbid: key
+					}
+					this.setState({
+						user: user,
+					});
 				});
+				
 			}
 		});
 		// add error handler
