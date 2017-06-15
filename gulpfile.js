@@ -9,6 +9,7 @@ const notify = require('gulp-notify');
 const sass = require('gulp-sass');
 const plumber = require('gulp-plumber');
 const concat = require('gulp-concat');
+// const historyFallback = require('connect-history-api-fallback');
 
 gulp.task('styles', () => {
 	return gulp.src('./dev/styles/**/*.scss')
@@ -26,7 +27,7 @@ gulp.task('js', () => {
 		.bundle()
 		.on('error',notify.onError({
 			message: "Error: <%= error.message %>",
-			title: 'Error in JS 💀'
+			title: 'Error in JS'
 		}))
 		.pipe(source('app.js'))
 		.pipe(buffer())
@@ -38,6 +39,9 @@ gulp.task('bs', () => {
 	return browserSync.init({
 		server: {
 			baseDir: './'
+			// middleware: [
+			// 	historyFallback();
+			// ]
 		}
 	});
 });

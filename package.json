@@ -25,5 +25,8 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "vinyl-sourcemaps-apply": "^0.2.1"
+  },
+  "dependencies": {
+    "react-router-dom": "^4.1.1"
   }
 }
