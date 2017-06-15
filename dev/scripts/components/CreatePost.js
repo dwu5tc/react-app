@@ -36,7 +36,7 @@ export default class CreatePost extends React.Component {
 		e.preventDefault();
 		var userId = this.props.currUser.uid;
 		var userRef = firebase.database().ref("users/"+userId);
-		var postsRef = firebase.database().ref("posts/").push();
+		var postsRef = firebase.database().ref("posts/").push(); // refactor 2nd line to postsRef.push().key?
 		var key = postsRef.key;
 		var date = new Date();
 		var timestamp = date.getTime();
