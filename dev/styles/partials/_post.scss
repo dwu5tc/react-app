@@ -1,0 +1,39 @@
+.post {
+	margin-top: 30px;
+	width: 75%;
+	display: flex;
+	flex-direction: row;
+	&__author {
+		margin-right: 15px;
+		width: 60px;
+		display: flex;
+		// background-color: transparent;
+	}
+	&__content {
+		width: 80%;
+		background-color: $white;
+	}
+}
+
+.fa-times {
+	color: $red;
+}
+
+.post__header {
+	padding: 10px;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+}
+
+.post .text-post {
+
+}
+
+.post .image-post {
+
+}
+
+.post .poll-post {
+	
+}

@@ -1,0 +1,76 @@
+.new-post {
+	margin-top: 10%;
+	max-width: 600px;
+	width: 80%;
+	padding: 0px 20px 0px 20px;
+	border-radius: 3px;
+	background-color: $white;
+	display: flex;
+	flex-direction: column;
+	form > * {
+		margin: 20px 0px 20px 0px;
+	}
+}
+
+.new-post .text-post {
+	.post-content {
+		display: flex;
+		flex-direction: column;
+		.text-title {
+
+		}
+		.text-content {
+
+		}
+	}
+}
+
+.new-post .image-post {
+	.post-content {
+		display: flex;
+		flex-direction: column;
+		.image-text {
+
+		}
+	}
+}
+
+.new-post .poll-post {
+	.post-content {
+		display: flex;
+		flex-flow: row wrap;
+		.poll-question {
+			width: 100%;
+		}
+		.poll-option {
+			width: 100%;
+		}
+	}
+}
+
+.post-type {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	> * {
+		margin-right: 20px;
+	}
+}
+
+.privacy-settings {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	> * {
+		margin-right: 20px;
+	}
+}
+
+.post-control {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}

@@ -1,0 +1,132 @@
+html {
+	background-color: $bgColor;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	border-radius: 3px;
+}
+
+h1 {
+	font-family: 'Roboto', sans-serif;
+	color: $ltColor;
+	text-transform: none;
+}
+
+h2 {
+	font-family: 'Roboto', sans-serif;
+	color: $ltColor;
+}
+
+h3 {
+	font-family: 'Roboto', sans-serif;
+	color: $ltColor;
+}
+
+p {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	color: $dkGray;
+}
+
+i {
+	margin-right: 8px;
+}
+
+ul {
+	list-style-type: none;
+}
+
+a {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
+	text-decoration: none;
+	color: $ltColor;
+	text-transform: uppercase;
+	letter-spacing: 0.8px;
+	transition: all 0.5s ease-in-out;
+	&:link,
+	&:visited {
+		color: $ltColor;
+	}
+	&:hover,
+	&:active {
+		color: $white;
+	}
+}
+
+input {
+	border: none;
+}
+
+span {
+	display: inline-block;
+	line-height: 0; // vertical center the text
+}
+
+img {
+	display: block;
+	width: 100%;
+}
+
+button {
+	background-color: transparent;
+	border: none;
+}
+
+.btn {
+	height: 35px;
+	border-radius: 3px;
+	display: flex;
+	padding: 5px 15px;
+	color: $dkGray;
+	font-size: 14px;
+	font-weight: 100;
+	background-color: transparent;
+	border: 1px solid $dkGray;
+	align-items: center;
+	text-transform: uppercase;
+	letter-spacing: 0.8px;
+	transition: all 0.5s ease-in-out;
+	&:hover,
+	&--selected {
+		color: $white;
+		background-color: $dkGray;
+		border: 1px solid $white;
+	}
+	&--submit {
+
+	}
+	&--cancel {
+
+	}
+	&--login,
+	&--logout,
+	&--new-post {
+		color: $white;
+		border: 1px solid $white;
+		&:hover,
+		&:active {
+			color: $dkGray;
+			background-color: $white;
+			border: 1px solid $dkGray;
+		}
+	}
+}
+
+section {
+	height: calc(100vh - 60px);
+	overflow: auto;
+}
+
+.wrapper {
+	width: 75%;
+	display: flex;
+	margin: 0 auto;
+	flex-direction: column;
+	align-items: center;
+}
+
+
+
