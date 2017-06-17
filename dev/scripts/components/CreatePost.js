@@ -108,24 +108,25 @@ export default class CreatePost extends React.Component {
 		}
 		switch(this.state.type) {
 			case "text":
-				obj.type = "text",
-				obj.title = this.state.textTitle,
-				obj.content = this.state.textContent
+				obj.type = "text";
+				obj.title = this.state.textTitle;
+				obj.content = this.state.textContent;
 				this.updateFirebase(obj);
 				break;
 			case "image":
 				var uploadTask = imageRef.put(this.state.imageFile).then(() => {
 					var urlObject =imageRef.getDownloadURL().then((data) => {
 						obj.imagePath = data;
-						obj.type = "image",
-						obj.caption = this.state.imageText
+						obj.type = "image";
+						obj.caption = this.state.imageText;
 						this.updateFirebase(obj);
 					});
 				});
 				break;
 			case "poll":
-				obj.type = "poll",
-				obj.question = this.state.pollQuestion
+				obj.type = "poll";
+				obj.question = this.state.pollQuestion;
+				obj.options = this.state.pollOptions;
 				this.updateFirebase(obj);
 				break;
 		}

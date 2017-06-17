@@ -31,7 +31,8 @@ export default class ImagePost extends Post {
 						</div>}
 					</div>
 				</div>
-				
+				{this.props.currUser.uid != this.props.currPost.user.id && 
+					this.renderEngagementSection()}
 			</div>
 		)
 	}

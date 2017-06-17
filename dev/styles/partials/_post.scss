@@ -62,5 +62,29 @@
 }
 
 .post.poll-post {
+	.post__main {
+		padding: 0px 10px 10px 10px;
+		h2 {
+			text-align: center;
+			margin-bottom: 5px;
+		}
+	}
+	.poll-option {
+		&__bar {
+			height: 16px;
+			background-color: $pollColor1;
+		}
+	}
+}
 
+.poll-option:nth-of-type(2) .poll-option__bar {
+	background-color: $pollColor2;
+}
+
+.poll-option:nth-of-type(3) .poll-option__bar {
+	background-color: $pollColor3;
+}
+
+.poll-option:nth-of-type(4) .poll-option__bar {
+	background-color: $pollColor4;
 }

@@ -7,11 +7,6 @@ export default class TextPost extends Post {
 		this.state = {
 		}
 	}
-	renderEngagementSection() {
-		<div className="engagement-section">
-
-		</div>
-	}
 	render() {
 		return (
 			<div className="post text-post">

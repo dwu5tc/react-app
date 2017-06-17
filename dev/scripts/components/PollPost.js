@@ -7,7 +7,25 @@ export default class PollPost extends Post { //props are question, and
 		this.state = {
 		}
 	}
+	renderPollOption(option, total) {
+		console.log("rendering poll option", option);
+		if (option.option != "") {
+			console.log("GONNA RETURN SOME SHIT", option);
+			return (
+				<div className="poll-option">
+					<p>{option.option} ({option.votes}/{total})</p>
+					<div className="poll-option__bar" style={{width: `${option.votes/total*100}%`}}></div>
+				</div>
+			)
+		}
+	}
 	render() {
+		var totalVotes = 0;
+		for (let i = 0; i < this.props.currPost.options.length; i++) {
+			if (this.props.currPost.options[i].option != "") {
+				totalVotes += this.props.currPost.options[i].votes;
+			}
+		}
 		return (
 			<div className="post poll-post">
 				<div className="post__author">
@@ -22,10 +40,17 @@ export default class PollPost extends Post { //props are question, and
 						{Post.prototype.renderHeaderDiv(this.props.currUser, this.props.currPost)}
 					</div>
 					<div className="post__main">
-						<h3>{this.props.currPost.pollQuestion}</h3>
-						{}
+						{console.log(this.props.currPost)}
+						<h2>{this.props.currPost.question}</h2>
+						<div className="poll-container">
+							{this.props.currPost.options.map((option) => {
+								return this.renderPollOption(option, totalVotes);
+							})}
+						</div>
 					</div>
 				</div>
+				{this.props.currUser.uid != this.props.currPost.user.id && 
+					this.renderEngagementSection()}
 			</div>
 		)
 	}
