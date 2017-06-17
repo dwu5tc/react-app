@@ -15,7 +15,9 @@ class Settings extends React.Component {
 	}
 	render() {
 		return (
+			<section className="settings">
 
+			</section>
 		);
 	}
 }

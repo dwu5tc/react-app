@@ -1,5 +1,6 @@
 import React from 'react';
 import CreatePost from "./CreatePost.js";
+import HomeFeed from "./HomeFeed.js";
 
 export default class Home extends React.Component {
 	constructor(props) {
@@ -7,11 +8,9 @@ export default class Home extends React.Component {
 		this.postCreate = this.postCreate.bind(this);
 		this.postSubmitted = this.postSubmitted.bind(this);
 		this.state = {
-			user: this.props.currUser,
 			posts: [],
 			creatingPost: false 
 			// add pagination
-			// https://firebase.google.com/docs/database/admin/retrieve-data 
 		}
 	}
 	postCreate() {
@@ -67,24 +66,24 @@ export default class Home extends React.Component {
 		}
 	}
 	render() {
-		console.log("ASKLGASL:G", this.state.creatingPost)
 		if (this.state.creatingPost) {
 			return (
-				<div className="new-post">
-					<CreatePost 
-					currUser={this.props.currUser}
-					handleSubmitPost={this.postSubmitted} />
-				</div>
+				<section className="creating-post">
+					<div className="new-post">
+						<CreatePost 
+						currUser={this.props.currUser}
+						handleSubmitPost={this.postSubmitted} />
+					</div>
+				</section>
 			);
 		}
 		else {
 			return (
-				<div className="home">
-					<button onClick={this.postCreate}>+ New Post</button>
-					<div className="home__all-posts">
-						{this.state.posts.map((post) => this.renderPost(post))}
-					</div>
-				</div>
+				<section className="home">
+					<button className="btn btn--new-post" onClick={this.postCreate}><i className="fa fa-plus-circle" aria-hidden="true"></i>New Post</button>
+					<HomeFeed 
+					currUser={this.props.currUser}/>
+				</section>
 			);
 		}
 			
@@ -101,4 +100,10 @@ export default class Home extends React.Component {
 		// 	}
 		// }) 
 	}
+
+	// idk() {
+	// 	<div className="home__all-posts">
+	// 		{this.state.posts.map((post) => this.renderPost(post))}
+	// 	</div>
+	// }
 }

@@ -9,30 +9,37 @@ export default class Login extends React.Component {
 		}
 	}
 	render() {
-		if (this.state.user) {
+		if (this.props.currUser) {
 			return (
 				<div className="logout">
-					<div className="user__image">
-						<image src="" alt=""/>
+					<div className="wrapper">
+						<div className="logout__container">
+							<div className="user__image">
+								<img src={this.props.currUser.photoURL} alt=""/>
+							</div>
+							<h3>{this.props.currUser.displayName}</h3>
+							<h4>Not you?</h4>
+							<button className="btn btn--login" onClick={this.props.handleLogout}><span>Logout</span></button>
+						</div>
 					</div>
-					<h3>Not you?</h3>
-					<button onClick={this.props.handleLogout}><span>Logout</span></button>
 				</div>
 			);
 		}
 		else {
 			return (
 				<div className="login">
-					<div className="login__laksjd">
-						<h2>IDK IDK IDK</h2>
-						<p>idk idk idk idk idk</p>
+					<div className="wrapper">
+						<div className="login__container">
+							<h3>welcome to idk-idk</h3>
+							<h4>lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit obcaecati laboriosam nobis corporis accusantium, non assumenda quis tempora quo voluptatibus,</h4>
+							<button className="btn btn--logout" onClick={this.props.handleLogin}>Login</button>
+						</div>
 					</div>
-					<button onClick={this.props.handleLogin}>Login</button>
 				</div>
 			);
 		}
 	}
-	componentWillReceiveProps(nextProps) {
+	componentWillReceiveProps(nextProps) { // why can't the component be constructed with props?
 		this.setState({
 			user: nextProps.currUser
 		});

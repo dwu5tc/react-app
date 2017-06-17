@@ -16,11 +16,19 @@ h1 {
 
 h2 {
 	font-family: 'Roboto', sans-serif;
-	color: $ltColor;
+	color: $dkGray;
+	font-size: 24px;
 }
 
 h3 {
 	font-family: 'Roboto', sans-serif;
+	color: $white;
+}
+
+h4 {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
+	font-size: 16px;
 	color: $ltColor;
 }
 
@@ -31,6 +39,10 @@ p {
 }
 
 i {
+	
+}
+
+.btn i {
 	margin-right: 8px;
 }
 
@@ -56,23 +68,32 @@ a {
 	}
 }
 
-input {
+input,
+textarea {
 	border: none;
+	padding: 8px 0px 8px 8px;
 }
 
 span {
 	display: inline-block;
-	line-height: 0; // vertical center the text
+}
+
+.btn span {
+	line-height: 0; // vertical center the text in btns
 }
 
 img {
 	display: block;
 	width: 100%;
+	min-width: 100%;
 }
 
 button {
 	background-color: transparent;
 	border: none;
+	// display: flex;
+	// justify-content: center;
+	// align-items: center;
 }
 
 .btn {
@@ -121,7 +142,7 @@ section {
 }
 
 .wrapper {
-	width: 75%;
+	width: 85%;
 	display: flex;
 	margin: 0 auto;
 	flex-direction: column;

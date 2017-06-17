@@ -4,7 +4,7 @@
 	display: flex;
 	flex-direction: row;
 	&__author {
-		margin-right: 15px;
+		margin-right: 10px;
 		width: 60px;
 		display: flex;
 		// background-color: transparent;
@@ -15,8 +15,21 @@
 	}
 }
 
-.fa-times {
+.header-icon {
+	width: 45px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.fa-times,
+.fa-heart,
+.fa-heart-o {
 	color: $red;
+}
+
+.fa-heart,
+.fa-heart-o {
+	margin-left: 5px;
 }
 
 .post__header {
@@ -26,14 +39,28 @@
 	justify-content: space-between;
 }
 
-.post .text-post {
+.post.text-post {
+	.post__main {
+		padding: 0px 10px 10px 10px;
+		h2 {
+			text-align: center;
+			margin-bottom: 5px;
+		}
+	}
 
 }
 
-.post .image-post {
-
+.post.image-post {
+	.post__main {
+		&__image-container img {
+			border-radius: 0px;
+		}
+		&__image-caption {
+			padding: 10px 10px 10px 10px;
+		}
+	}
 }
 
-.post .poll-post {
-	
+.post.poll-post {
+
 }

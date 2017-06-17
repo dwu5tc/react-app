@@ -3,9 +3,9 @@ import TextPost from "./TextPost.js";
 import ImagePost from "./ImagePost.js";
 import PollPost from "./PollPost.js";
 
-// POSTS WHICH ARE NOT THE USERS
+// POSTS WHICH ARE THE USERS
 
-export default class Feed extends React.Component {
+export default class HomeFeed extends React.Component {
 	constructor(props) {
 		super(props);
 		// this.convertPosts = this.convertPosts.bind(this);
@@ -24,24 +24,14 @@ export default class Feed extends React.Component {
 			var allPosts = snapshot.val();
 			var userPosts = [];
 			for (let key in allPosts) {
-				if (this.checkPost(allPosts[key])) { 
-					userPosts.push(allPosts[key]); 
+				if (allPosts[key].user.id == userId) {
+					userPosts.push(allPosts[key]);
 				}
 			}
 			this.setState({
 				posts: userPosts
 			});
 		});
-	}
-	checkPost(post) {
-		if (post.user.id == this.props.currUser.uid) 
-			{ return false; 
-		}
-		if (post.privacy == "private") { 
-			return false; 
-		}
-		// if (post.privacy == "friends" && this.props.currUser.){
-		return true;
 	}
 	renderFeedPost(post) {
 		switch(post.type) {
@@ -66,6 +56,7 @@ export default class Feed extends React.Component {
 		}
 	}
 	render() {
+		console.log("HOMEFEED");
 		return (
 			<div className="wrapper">
 				{this.state.posts.map((post) => {

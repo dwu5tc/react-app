@@ -12,6 +12,7 @@ import {
 import Login from "./components/Login.js";
 import Home from "./components/Home.js";
 import CreatePost from "./components/CreatePost.js";
+import HomeFeed from "./components/HomeFeed.js";
 import Feed from "./components/Feed.js";
 
 var config = {
@@ -27,124 +28,6 @@ firebase.initializeApp(config);
 const auth = firebase.auth();
 const dbRef = firebase.database().ref('/');
 const provider = new firebase.auth.GoogleAuthProvider();
-
-/*
-class QueryResults extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			currUser: "",
-			searchedUsers: ""
-		}
-	}
-	follow(user) { 
-		// go into db and add
-	}
-	unfollow(user) {
-		// go into db and remove
-	}
-	followButton(user) {
-		if (currUser.friends.includes(user)) {
-			return (
-				<button onClick={this.unfollow(user)}>
-					<span>Unfollow</span>
-				</button>
-			);
-		}
-		else {
-			return (
-				<button onClick={this.follow(user)}>
-					<span>Follow</span>
-				</button>
-			);
-		}
-	}
-	render() {
-		return (
-			<ul className="user-list">
-				{this.props.searchedUsers.map((user) => {
-					return (
-						<li className="user">
-							<span>{user.name}</span>
-							{followButton(user.name)}
-						</li>
-					)
-				});}
-			</ul>
-		);
-	}
-}
-
-class TextPost extends Post {
-	constructor(props) {
-		super(props);
-		this.state = {
-
-		}
-	}
-	render() {
-		return (
-			<div className="post text-post">
-				<div className="author">
-					<div className="author__image">
-						<image src="" alt=""/>
-					</div>
-				</div>
-				<h3>this.props.</h3>
-				<p>this.props.</p>
-			</div>
-		);
-	}
-}
-
-class ImagePost extends Post {
-	constructor(props) {
-		super(props);
-		this.state = {
-
-		}
-	}
-	render() {
-		return (
-			<div className="post image-post">
-				<div className="author">
-					<div className="author__image">
-						<image src="" alt=""/>
-					</div>
-				</div>
-				<figure className="image_post">
-				</figure>
-				<figcaption>this.props.</figcaption>
-			</div>
-		);
-	}
-}
-
-class PollPost extends Post { //props are question, and 
-	constructor(props) {
-		super(props);
-		this.state = {
-
-		}
-	}
-	render() {
-		return (
-			<div className="post poll-post">
-				<div className="author">
-					<div className="author__image">
-						<image src="" alt=""/>
-					</div>
-				</div>
-				<h3>this.props.</h3>
-				{this.props..options.map((options) => {
-					return (
-
-					);
-				})}
-			</div>
-		)
-	}
-}*/
 
 class App extends React.Component {
 	constructor() {
@@ -175,12 +58,11 @@ class App extends React.Component {
 	}
 	mainPage() {
 		if (this.state.user) {
-			console.log("hihih", this.state.user);
 			return (
 				<div>
 					<nav>
 						<div className="nav-left">
-							<Link to="/"><h1>idk-idk</h1></Link>
+							<Link to="/"><h1>idk</h1></Link>
 						</div>
 						<div className="nav-right">
 							<Link to="/home"><span>Home</span></Link>
@@ -189,10 +71,6 @@ class App extends React.Component {
 							<Link to="/settings"><span>Settings</span></Link>
 						</div>
 					</nav>
-					{/*
-					<Route exact path="/" render={() => {
-						<Redirect to="/home" />
-					}} /> */}
 					<Route exact path="/" render={() => {
 						return (
 							<Login
@@ -204,14 +82,15 @@ class App extends React.Component {
 					<Route path="/home" render={() => {
 						return (
 							<Home
-							currUser={this.state.user}
-							handleLogout={this.userLogout} />
+							currUser={this.state.user} />
 						);
 					}} /> 
-					<Route path="/feed" render={() => {
+					<Route path="/feed" render={() => { // hacky fix atm
 						return (
-							<Feed
-							currUser={this.state.user} />
+							<section className="feed">
+								<Feed
+								currUser={this.state.user} />
+							</section>
 						);
 					}} />
 					{/*
@@ -239,17 +118,11 @@ class App extends React.Component {
 			)
 		} 
 		else {
-			console.log("nononono", this.state.user);
 			return (
 				<div>
 					<nav>
-						<h1>idk-idk</h1>
+						<h1>idk</h1>
 					</nav>
-					{/*
-					<Route exact path="/" render={() => {
-						return <Redirect to="/login" />
-					}} />
-					*/}
 					<Route exact path="/" render={() => {
 						return (
 							<Login
@@ -266,7 +139,6 @@ class App extends React.Component {
 	render() {
 		return (
 			<Router>
-				{/* <h1>hi</h1> */}
 				{this.mainPage()} 
 			</Router>
 		)
