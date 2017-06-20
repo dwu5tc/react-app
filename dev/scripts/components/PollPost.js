@@ -8,13 +8,17 @@ export default class PollPost extends Post { //props are question, and
 		}
 	}
 	renderPollOption(option, total) {
-		console.log("rendering poll option", option);
 		if (option.option != "") {
-			console.log("GONNA RETURN SOME SHIT", option);
+			if (option.votes == 0) { 
+				var width = 1; 
+			}
+			else { 
+				var width = (option.votes/total*100)+1; 
+			}
 			return (
 				<div className="poll-option">
 					<p>{option.option} ({option.votes}/{total})</p>
-					<div className="poll-option__bar" style={{width: `${option.votes/total*100}%`}}></div>
+					<div className="poll-option__bar" style={{width: `${width}%`}}></div>
 				</div>
 			)
 		}

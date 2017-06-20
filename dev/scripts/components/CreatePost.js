@@ -103,7 +103,7 @@ export default class CreatePost extends React.Component {
 			timestamp: timestamp,
 			date: date,
 			privacy: this.state.privacy,
-			likes: []
+			likes: 0
 			// comments: []
 		}
 		switch(this.state.type) {

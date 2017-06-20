@@ -70,9 +70,16 @@
 		}
 	}
 	.poll-option {
+		margin-bottom: 8px;
+		p {
+			margin-bottom: 3px;
+		}
 		&__bar {
 			height: 16px;
 			background-color: $pollColor1;
+		}
+		&:last-child {
+			margin-bottom: 0px;
 		}
 	}
 }
