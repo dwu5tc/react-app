@@ -39,9 +39,10 @@ export default class Post extends React.Component {
 		}
 	}
 	renderEngagementSection() {
-		<div className="engagement-section">
-
-		</div>
+		return (
+			<div className="engagement-section">
+			</div>
+		)
 	}
 	deletePost(key) {
 		const postRef = firebase.database().ref("posts/"+key);

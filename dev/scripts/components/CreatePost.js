@@ -280,12 +280,8 @@ export default class CreatePost extends React.Component {
 					{privateButton}
 				</div>
 				<div className="post-control">
-					<button className="btn btn--cancel" onClick={() => this.props.handleSubmitPost()}>
-						<span>Cancel</span>
-					</button>
-					<button className="btn btn--submit">
-						<span>Submit</span>
-					</button>
+					<button className="btn btn--cancel" onClick={() => this.props.handleSubmitPost()}><span>Cancel</span></button>
+					<button className="btn btn--submit"><span>Submit</span></button>
 				</div>
 			</form>
 		)
