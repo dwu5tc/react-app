@@ -104,7 +104,6 @@ export default class CreatePost extends React.Component {
 			date: date,
 			privacy: this.state.privacy,
 			likes: 0
-			// comments: []
 		}
 		switch(this.state.type) {
 			case "text":

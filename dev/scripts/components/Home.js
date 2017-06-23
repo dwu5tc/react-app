@@ -86,24 +86,5 @@ export default class Home extends React.Component {
 				</section>
 			);
 		}
-			
 	}
-	componentDidMount() {
-		// const userId = this.state.user.uid;
-		// const userRef = firebase.database().ref(userId);
-		// const postsRef = firebase.database.ref(userId+"/posts")
-		// postsRef.on("value", (snapshot) => {
-		// 	const dbPosts = snapshot.val();
-		// 	conss.postCreates = [];
-		// 	for (let post in dbPosts) {
-		// 		if (post.author == )
-		// 	}
-		// }) 
-	}
-
-	// idk() {
-	// 	<div className="home__all-posts">
-	// 		{this.state.posts.map((post) => this.renderPost(post))}
-	// 	</div>
-	// }
 }

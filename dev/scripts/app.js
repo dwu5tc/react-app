@@ -70,7 +70,6 @@ class App extends React.Component {
 							<Link to="/feed"><span>Feed</span></Link>
 							<Link to="/friends"><span>Friends</span></Link>
 							<Link to="/" onClick={this.userLogout}><span>Log Out</span></Link>
-							{/*<button onClick={this.userLogout}><span>Logout</span></button>*/}
 						</div>
 					</nav>
 					<Route exact path="/" render={() => {
@@ -101,15 +100,6 @@ class App extends React.Component {
 							currUser={this.state.user} />
 						);
 					}} />
-					{/*
-					<Route path="/settings" render={() => {
-						return (
-							<Settings
-							currUser={this.state.user} />
-						);
-					}} />
-					<Route path ="/post/:userid/:postid" render={Post} />
-					*/}
 				</div>
 			)
 		} 
@@ -150,7 +140,7 @@ class App extends React.Component {
 						userRef.set({
 							uid: user.uid,
 							name: user.displayName,
-							pic: user.photoURL,
+							photo: user.photoURL,
 							following: []
 						});
 					}

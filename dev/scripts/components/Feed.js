@@ -16,23 +16,6 @@ export default class Feed extends React.Component {
 	handleLogout() {
 		this.props.userLogout();
 	}
-	getPosts() {
-		var userId = this.props.currUser.uid;
-		var postsRef = firebase.database().ref("posts/");
-		var userRef = firebase.database().ref("users/"+userId);
-		postsRef.on("value", (snapshot) => {
-			var allPosts = snapshot.val();
-			var userPosts = [];
-			for (let key in allPosts) {
-				if (this.checkPost(allPosts[key])) { 
-					userPosts.push(allPosts[key]); 
-				}
-			}
-			this.setState({
-				posts: userPosts
-			});
-		});
-	}
 	checkPost(post) {
 		if (post.user.id == this.props.currUser.uid) 
 			{ return false; 
@@ -75,6 +58,20 @@ export default class Feed extends React.Component {
 		)
 	}
 	componentDidMount() {
-		this.getPosts(); 
+		var userId = this.props.currUser.uid;
+		var postsRef = firebase.database().ref("posts/");
+		var userRef = firebase.database().ref("users/"+userId);
+		postsRef.on("value", (snapshot) => {
+			var allPosts = snapshot.val();
+			var userPosts = [];
+			for (let key in allPosts) {
+				if (this.checkPost(allPosts[key])) { 
+					userPosts.push(allPosts[key]); 
+				}
+			}
+			this.setState({
+				posts: userPosts
+			});
+		});
 	}
 }

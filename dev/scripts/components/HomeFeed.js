@@ -3,9 +3,8 @@ import TextPost from "./TextPost.js";
 import ImagePost from "./ImagePost.js";
 import PollPost from "./PollPost.js";
 
-// POSTS WHICH ARE THE USERS
 // setState and render posts as the getPost loop runs?
-// refactor 
+// refactor this
 
 export default class HomeFeed extends React.Component {
 	constructor(props) {
@@ -16,23 +15,6 @@ export default class HomeFeed extends React.Component {
 	}
 	handleLogout() {
 		this.props.userLogout();
-	}
-	getPosts() {
-		var userId = this.props.currUser.uid;
-		var postsRef = firebase.database().ref("posts/");
-		var userRef = firebase.database().ref("users/"+userId);
-		postsRef.on("value", (snapshot) => {
-			var allPosts = snapshot.val();
-			var userPosts = [];
-			for (let key in allPosts) {
-				if (allPosts[key].user.id == userId) {
-					userPosts.push(allPosts[key]);
-				}
-			}
-			this.setState({
-				posts: userPosts
-			});
-		});
 	}
 	renderFeedPost(post) {
 		switch(post.type) {
@@ -66,6 +48,20 @@ export default class HomeFeed extends React.Component {
 		)
 	}
 	componentDidMount() {
-		this.getPosts(); 
+		var userId = this.props.currUser.uid;
+		var postsRef = firebase.database().ref("posts/");
+		var userRef = firebase.database().ref("users/"+userId);
+		postsRef.on("value", (snapshot) => {
+			var allPosts = snapshot.val();
+			var userPosts = [];
+			for (let key in allPosts) {
+				if (allPosts[key].user.id == userId) {
+					userPosts.push(allPosts[key]);
+				}
+			}
+			this.setState({
+				posts: userPosts
+			});
+		}); 
 	}
 }

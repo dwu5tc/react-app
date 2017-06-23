@@ -124,7 +124,8 @@ button {
 	}
 	&--login,
 	&--logout,
-	&--new-post {
+	&--new-post,
+	&--friends {
 		color: $white;
 		border: 1px solid $white;
 		&:hover,

@@ -14,9 +14,7 @@ export default class PollPost extends Post {
 		postRef.child("options").once("value").then((snapshot) => {
 			var temp = snapshot.val();
 			for (let i = 0; i < temp.length; i++) { // unvote first
-				console.log("TEMPIIIII", temp[i].votes)
 				if (temp[i].votes == 0 || typeof temp[i].votes == "number") { // can remove typeof after
-					console.log("continuing!!!!", temp[i].votes);
 					continue;
 				}
 				else if (temp[i].votes.includes(user)) {
@@ -57,7 +55,6 @@ export default class PollPost extends Post {
 		})
 	}
 	renderPollButton(option, index) {
-		console.log("option", option, index);
 		if (option.option != "") {
 			if (index == this.state.index) {
 				return (
@@ -121,7 +118,6 @@ export default class PollPost extends Post {
 		var totalVotes = 0;
 		for (let i = 0; i < this.props.currPost.options.length; i++) {
 			if (this.props.currPost.options[i].option != "") {
-				console.log("WTFWTF", this.props.currPost.options[i].votes.length, totalVotes);
 				if (typeof this.props.currPost.options[i].votes.length == "number") {
 					totalVotes += this.props.currPost.options[i].votes.length;
 				}
@@ -141,7 +137,6 @@ export default class PollPost extends Post {
 						{Post.prototype.renderHeaderDiv(this.props.currUser, this.props.currPost)}
 					</div>
 					<div className="post__main">
-						{console.log(this.props.currPost)}
 						<h2>{this.props.currPost.question}</h2>
 						<div className="poll-container">
 							{this.props.currPost.options.map((option) => {
@@ -169,15 +164,12 @@ export default class PollPost extends Post {
 	componentDidMount() {
 		for (let i = 0; i < this.props.currPost.options.length; i++) {
 			if (this.props.currPost.options[i].votes == 0 || typeof this.props.currPost.options[i].votes == "number") { // no votes
-				console.log(this.props.currPost.options[i].votes == 0, typeof this.props.currPost.options[i].votes == "number", typeof this.props.currPost.options[i].votes == "string");
-				console.log("no votes for", this.props.currPost.options[i], typeof this.props.currPost.options[i].votes);
 				continue;
 			}
 			else if (!this.props.currPost.options[i].votes.includes(this.props.currUser.uid)) { // unvoted by currUser
 				continue;
 			}
 			else { // has voted
-				console.log("VOTED HERE!!!!!!!!!", i, this.props.currPost.options[i].option)
 				this.setState({
 					index: i,
 					hasVoted: true
