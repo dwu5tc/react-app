@@ -79,11 +79,15 @@ export default class Friends extends React.Component {
 		}
 		return (
 			<div className="user">
-				<div className="user__image">
-					<img src={photo} alt={`${user.name}`}/>
+				<div className="user__left">
+					<div className="user__image">
+						<img src={photo} alt={`${user.name}`}/>
+					</div>
+					<h3>{user.name}</h3>
 				</div>
-				<h3>{user.name}</h3>
-				{this.renderFollowButton(user)}
+				<div className="user__follow-button">
+					{this.renderFollowButton(user)}
+				</div>
 			</div>
 		)
 	}
@@ -126,8 +130,8 @@ export default class Friends extends React.Component {
 		if (this.state.following) { // display all users the currUser is following 
 			return (
 				<section className="friends">
+					<button className="btn btn--friends" onClick={() => this.beginSearch()}><span>Search Users</span></button>
 					<div className="wrapper">
-						<button className="btn btn--friends" onClick={() => this.beginSearch()}><span>Search Users</span></button>
 						<div className="following">
 							{this.state.following.map((user) => {
 								return this.renderUser(user);
@@ -140,8 +144,8 @@ export default class Friends extends React.Component {
 		else { // currUser follows no one; display search form
 			return (
 				<section className="friends">
+					<button className="btn btn--friends" onClick={() => this.beginSearch()}><span>Search Users</span></button>
 					<div className="wrapper">
-						<button className="btn btn--friends" onClick={() => this.beginSearch()}><span>Search Users</span></button>
 					</div>
 				</section>
 			)

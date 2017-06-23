@@ -29,7 +29,7 @@ export default class Login extends React.Component {
 				<div className="login">
 					<div className="wrapper">
 						<div className="login__container">
-							<h3>Welcome to IDK</h3>
+							<h3>welcome to idk</h3>
 							<h4>IDK is a social media website on which you can write texts posts, upload images, or create polls. 
 							These can be stored privately, or can be shared with your followers and the public.</h4>
 							<button className="btn btn--logout" onClick={this.props.handleLogin}>Login</button>

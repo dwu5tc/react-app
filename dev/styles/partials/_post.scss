@@ -1,17 +1,25 @@
 .post {
 	margin-top: 50px; //30px
-	width: 80%;
+	width: 100%;
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
 	&__author {
 		margin-right: 20px; //10, 15px
 		width: 80px; //60px
 		display: flex;
 		// background-color: transparent;
+		@media (max-width: 540px) {
+			margin-right: 10px;
+			width: 60px;
+		}
 	}
 	&__content {
 		width: 80%;
 		background-color: $white;
+	}
+	@media (max-width: 540px) {
+		margin-top: 30px;
 	}
 }
 
@@ -35,16 +43,34 @@
 .post__header {
 	padding: 10px;
 	display: flex;
-	flex-flow: row nowrap;
+	flex-direction: row;
+	flex-wrap: nowrap;
 	justify-content: space-between;
+	@media (max-width: 540px) {
+		flex-wrap: wrap;
+		p:nth-of-type(2),
+		.header-icon {
+			width: 50%;
+			order: 0;
+		}
+		p:first-child {
+			width: 100%;
+			text-align: center;
+			order: 1;
+		}
+	}
 }
 
 .post.text-post {
 	.post__main {
 		padding: 0px 10px 10px 10px;
 		h2 {
+			font-size: 32px;
 			text-align: center;
 			margin-bottom: 5px;
+			@media (max-width: 540px) {
+				font-size: 24px;
+			}
 		}
 	}
 
@@ -58,6 +84,9 @@
 		&__image-caption {
 			padding: 10px 10px 10px 10px;
 		}
+		button {
+			margin-top: 20px;
+		}
 	}
 }
 
@@ -70,6 +99,7 @@
 		}
 	}
 	.poll-option {
+		width: 99%; // compensate for the extra 1%
 		margin-bottom: 8px;
 		p {
 			margin-bottom: 3px;
@@ -81,6 +111,33 @@
 		&:last-child {
 			margin-bottom: 0px;
 		}
+	}
+}
+
+.btn--submit,
+.btn--revote {
+	margin-top: 10px;
+}
+
+.poll-options {
+	.btn:not(.btn--submit) {
+		width: 100%;
+		border: 1px solid transparent;
+	}
+	.btn:hover {
+		color: $dkGray;
+		background-color: transparent;
+		border: 1px solid $dkGray;
+	}
+	.btn--selected:not(.btn--submit) {
+		color: $dkGray;
+		background-color: transparent;
+		border: 1px solid $dkGray;
+	}
+	.btn--submit:hover,
+	.btn--revote:hover {
+		color: $white;
+		background-color: $dkGray;
 	}
 }
 

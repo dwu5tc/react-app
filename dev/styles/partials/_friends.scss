@@ -2,10 +2,9 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-}
-
-.wrapper > button {
-	margin: 50px 0px 0px 0px;
+	> button {
+		margin: 50px 0px 0px 0px;
+	}
 }
 
 .search-results,
@@ -24,23 +23,41 @@
 
 .user {
 	width: 100%;
-	height: 100px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 20px;
-	h2 {
-
+	@media (max-width: 540px) {
+		height: initial;
 	}
-	button {
+}
 
+.user__left {
+	width: calc(100% - 125px);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	@media (max-width: 540px) {
+		flex-direction: column;
+		align-items: flex-start;
 	}
+}
+
+.user__right {
+	display: flex;
+	align-items: center;
+	width: 125px;
 }
 
 .friends .user__image {
 	width: 100px;
+	margin: 0px 15px 0px 0px;
 	img {
 		max-width: 100%
+	}
+	@media (max-width: 540px) {
+		margin: 0px 0px 10px 0px;
+		width: 75px;
 	}
 }

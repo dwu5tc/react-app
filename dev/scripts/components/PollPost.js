@@ -143,7 +143,7 @@ export default class PollPost extends Post {
 								return this.renderPollOption(option, totalVotes); // why do i have to return if im using an arrow function???
 							})}
 						</div>
-						<button className="btn" onClick={() => {this.reselectOption()}}><span>Revote</span></button>
+						<button className="btn btn--revote" onClick={() => {this.reselectOption()}}><span>Revote</span></button>
 					</div>
 				</div>
 				{/*this.renderEngagementSection()*/}
