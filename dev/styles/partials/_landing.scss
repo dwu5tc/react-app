@@ -8,8 +8,10 @@
 		text-align: center;
 		h3 {
 			font-size: calc(40px + (80 - 40) * ((100vw - 540px) / (1500 - 540)));
-			width: 80%;
 			margin-bottom: 5px;
+		}
+		h4 {
+			width: 70%;
 		}
 		button {
 			margin-top: 20px;
