@@ -57,7 +57,6 @@ export default class HomeFeed extends React.Component {
 		}
 	}
 	render() {
-		console.log("HOMEFEED");
 		return (
 			<div className="wrapper">
 				{this.state.posts.map((post) => {

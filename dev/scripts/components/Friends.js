@@ -1,12 +1,11 @@
 import React from 'react';
 
-class Friends extends React.Component {
+export default class Friends extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.state = {
-			currUserQuery: ""
 		}
 	}
 	handleChange(e) {
@@ -16,155 +15,123 @@ class Friends extends React.Component {
 	}
 	handleSubmit() {
 		e.preventDefault();
-		// const userId = this.state.user.uid;
-		// const userRef = firebase.database().ref(userId);
-		// userRef.push(this.state.currentTodo);
-		// this.setState({
-		// 	currentTodo: '',
-		// });
 	}
-	handleLogout() {
-		this.props.userLogout();
-	}
-	getUsers() {
-		ajax({
-			// search fb for specific user
+	beginSearch() {
+		this.setState({
+			searching: true
 		});
 	}
 	followUser() {
 
 	}
-	queryResults() {
+	renderFollowButton() {
 
 	}
-	render() {
+	controlRenderFollowButton() {
+
+	}
+	toggleFollow(user) { // update following in current user, update followers in followed user
+		const userRef = firebase.database().ref("users/"+this.props.currUser.uid);
+		userRef.child("following").once("value").then((snapshot) => {
+			var temp = snapshot.val();
+			if (temp == 0) {
+				userRef.update({ following: [user] });
+			}
+			else if (temp.includes(user)) {
+				temp.splice(temp.indexOf(user), 1);
+				if (temp == 0 ) {
+					userRef.update({ following: 0 });
+				}
+				else {
+					userRef.update({ following: temp });
+				}
+			}
+			else {
+				temp.push(user);
+				userRef.update({ following: temp });
+			}
+		});
+	}
+	renderUser(user) {
+		console.log("RENDER USER", user);
 		return (
-			<section className="friends">
-				<form onSubmit={this.handleSubmit}>
-					<input name="userQuery" value={this.state.currUserQuery} onChange={this.handleChange} type="text" placeholder="Search"/>
-				 	
-					<input type="submit" value="Search"/>
-				</form>
-				<QueryResults users={queryResults} />
-			</section>
-		);
-	}
-}
-
-/*
-class QueryResults extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			currUser: "",
-			searchedUsers: ""
-		}
-	}
-	follow(user) { 
-		// go into db and add
-	}
-	unfollow(user) {
-		// go into db and remove
-	}
-	followButton(user) {
-		if (currUser.friends.includes(user)) {
-			return (
-				<button onClick={this.unfollow(user)}>
-					<span>Unfollow</span>
-				</button>
-			);
-		}
-		else {
-			return (
-				<button onClick={this.follow(user)}>
-					<span>Follow</span>
-				</button>
-			);
-		}
-	}
-	render() {
-		return (
-			<ul className="user-list">
-				{this.props.searchedUsers.map((user) => {
-					return (
-						<li className="user">
-							<span>{user.name}</span>
-							{followButton(user.name)}
-						</li>
-					)
-				});}
-			</ul>
-		);
-	}
-}
-
-class TextPost extends Post {
-	constructor(props) {
-		super(props);
-		this.state = {
-
-		}
-	}
-	render() {
-		return (
-			<div className="post text-post">
-				<div className="author">
-					<div className="author__image">
-						<image src="" alt=""/>
-					</div>
+			<div className="user">
+				<div className="user__image">
+					<img src={user.pic} alt={`${user.name}`}/>
 				</div>
-				<h3>this.props.</h3>
-				<p>this.props.</p>
-			</div>
-		);
-	}
-}
-
-class ImagePost extends Post {
-	constructor(props) {
-		super(props);
-		this.state = {
-
-		}
-	}
-	render() {
-		return (
-			<div className="post image-post">
-				<div className="author">
-					<div className="author__image">
-						<image src="" alt=""/>
-					</div>
-				</div>
-				<figure className="image_post">
-				</figure>
-				<figcaption>this.props.</figcaption>
-			</div>
-		);
-	}
-}
-
-class PollPost extends Post { //props are question, and 
-	constructor(props) {
-		super(props);
-		this.state = {
-
-		}
-	}
-	render() {
-		return (
-			<div className="post poll-post">
-				<div className="author">
-					<div className="author__image">
-						<image src="" alt=""/>
-					</div>
-				</div>
-				<h3>this.props.</h3>
-				{this.props..options.map((options) => {
-					return (
-
-					);
-				})}
+				<h2>{user.name}</h2>
+				<button onClick={() => this.toggleFollow(user.uid)}><span>Follow</span></button>
 			</div>
 		)
 	}
-}*/
+	controlRenderUser(user) {
+		if (user.uid == this.props.currUser.uid) {
+			console.log("SAME USER LOL");
+			return;
+		}
+		var patt = new RegExp(`^${this.state.query}`, "i");
+		if (patt.test(user.name)) {
+			if ((this.state.query) && this.state.query != "") {
+				return this.renderUser(user);
+			}
+		}
+	}
+	renderSearchForm() {
+		return (
+			<div className="search-container">
+				<h2>Search for a User</h2>
+				<form onSubmit={this.handleSubmit}>
+					<input name="query" value={this.state.query} onChange={this.handleChange} type="text" placeholder="Search for a User" />
+				</form>
+			</div>
+			
+		)
+	}
+	render() {
+		if (this.state.searching) { // render search form if user has clicked search button 
+			return (
+				<section className="friends">
+					{this.renderSearchForm()}
+					<div className="search-results">
+						{this.state.allUsers.map((user) => {
+							return this.controlRenderUser(user);
+						})}
+					</div>
+				</section>
+			)
+		}
+		if (this.state.following) { // display all users the currUser is following 
+			return (
+				<section className="friends">
+					<button onClick={() => this.beginSearch()}><span>Search for Users</span></button>
+					{this.state.following.map((user) => {
+						return this.renderUser(user);
+					})}
+				</section>
+			)
+		}
+		else { // currUser follows no one; display search form
+			return (
+				<section className="friends">
+					{this.renderSearchForm()}
+				</section>
+			)
+		}
+	}
+	componentDidMount() {
+		var user = this.props.currUser.uid;
+		const userRef = firebase.database().ref("users");
+		userRef.once("value").then((snapshot) => {
+			var temp = snapshot.val();
+			var allUsers = [];
+			for (var userItem in temp) { // temp is an object of users; must convert to an array
+				var userObj = temp[userItem];
+				allUsers.push(userObj);
+			}
+			this.setState({
+				allUsers: allUsers,
+				following: temp[user].following
+			})
+		});
+	}
+}

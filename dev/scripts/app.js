@@ -14,6 +14,7 @@ import Home from "./components/Home.js";
 import CreatePost from "./components/CreatePost.js";
 import HomeFeed from "./components/HomeFeed.js";
 import Feed from "./components/Feed.js";
+import Friends from "./components/Friends.js";
 
 var config = {
 	apiKey: "AIzaSyAtes0QKFVr-Fe_G4OHWH0G6N5xsIGGS9g",
@@ -68,7 +69,8 @@ class App extends React.Component {
 							<Link to="/home"><span>Home</span></Link>
 							<Link to="/feed"><span>Feed</span></Link>
 							<Link to="/friends"><span>Friends</span></Link>
-							<Link to="/settings"><span>Settings</span></Link>
+							<Link to="/" onClick={this.userLogout}><span>Log Out</span></Link>
+							{/*<button onClick={this.userLogout}><span>Logout</span></button>*/}
 						</div>
 					</nav>
 					<Route exact path="/" render={() => {
@@ -93,22 +95,16 @@ class App extends React.Component {
 							</section>
 						);
 					}} />
-					{/*
 					<Route path="/friends" render={() => {
 						return (
 							<Friends
 							currUser={this.state.user} />
 						);
 					}} />
+					{/*
 					<Route path="/settings" render={() => {
 						return (
 							<Settings
-							currUser={this.state.user} />
-						);
-					}} />
-					<Route path="/new-post" render={() => {
-						return (
-						s.postCreate
 							currUser={this.state.user} />
 						);
 					}} />
@@ -149,15 +145,17 @@ class App extends React.Component {
 				var userId = user.uid;
 				var userRef = firebase.database().ref("users/"+userId);
 				userRef.once("value").then((snapshot) => {
-					var userExists = snapshot.exists();
-					if (!userExists) { ;
+					var userExists = snapshot.exists(); // is it even necessary to check? always just call update?
+					if (!userExists) { 
 						userRef.set({
+							uid: user.uid,
 							name: user.displayName,
-							pic: user.photoURL
+							pic: user.photoURL,
+							following: []
 						});
 					}
 					this.setState({
-						user: user,
+						user: user
 					});
 				});
 				
