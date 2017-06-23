@@ -61,3 +61,13 @@
 		width: 75px;
 	}
 }
+
+.search-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	input {
+		width: 60%;
+	}
+}

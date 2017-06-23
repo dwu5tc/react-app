@@ -106,7 +106,7 @@ export default class Friends extends React.Component {
 		return (
 			<div className="search-container">
 				<h3>Search for a User</h3>
-				<input name="query" value={this.state.query} onChange={this.handleChange} type="text" placeholder="Search for a User" />
+				<input name="query" value={this.state.query} onChange={this.handleChange} type="text" placeholder="Enter name" />
 			</div>
 		)
 	}
@@ -114,8 +114,8 @@ export default class Friends extends React.Component {
 		if (this.state.searching) { // render search form if user has clicked search button 
 			return (
 				<section className="friends">
+					<button className="btn btn--friends" onClick={() => this.endSearch()}><span>Following</span></button>
 					<div className="wrapper">
-						<button className="btn btn--friends" onClick={() => this.endSearch()}><span>Following</span></button>
 						{this.renderSearchForm()}
 						<div className="search-results">
 							{this.state.allUsers.map((user) => {
